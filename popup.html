@@ -1,0 +1,82 @@
+<html>
+<body>
+<head>
+<link href="http://fonts.googleapis.com/css?family=Shojumaru" rel="stylesheet" type="text/css">
+
+<link href = "site.css" rel = "stylesheet" type = "text/css" />
+<script src="jquery-1.10.1.min.js"></script>
+<script type = "text/javascript" src = "popup.js" ></script>
+
+</head>
+<style>
+body {
+  min-width:150px;
+ 
+    height:300px;
+  background-color:darkblue;
+  color:white;
+  border-radius:10px;
+}
+</style>
+
+<center>
+<h3 align = "center" style = "font-family: 'Shojumaru', cursive"> You Lack Discipline!</h3>
+<button class = "imgBtn" 
+	id = "addBtn"
+    title = "Add current site to discipline list" >
+    <img style = "width: 40px; height: auto;" src = "images/addToList.png"/>
+</button>
+
+<button class = "imgBtn"
+	id = "editBtn"
+    title = "Show sites in your discipline list" >
+    <img style = "width: 40px; height: auto;" src = "images/showList.png" />
+</button>
+
+</center>
+<br />
+<div id = "message" style = "color:yellow; display:none"></div>
+<br />
+
+<form name = "timeForm" >
+
+<p>Set Work Start Time:</p>
+			<input class= "txtBox"  type = "text" id = "startHr" autocomplete = "on"/> :
+			<input class= "txtBox" type = "text" id = "startMin" autocomplete = "on"/>
+			<select class = "selectBox" class= "txtBox" id = "startAmPm" style = "width:50px">
+				<option selected= "selected" value = "am" >am</option>
+				<option value = "pm">pm</option>
+			</select>
+			<br />
+    
+<p>Set Work End Time:</p>
+			<input class= "txtBox" type = "text" id = "endHr" autocomplete = "on" /> :
+			<input class= "txtBox" type = "text" id = "endMin" autocomplete = "on" />
+			<select class = "selectBox" id = "endAmPm" style = "width:50px">
+				<option selected = "selected" value = "am" >am</option>
+				<option value = "pm">pm</option>
+			</select><br />
+</form>
+
+<center>
+	<button id = "setIntervalBtn" style = "width:150px;">Set Work Interval</button>
+	<button id = "resetIntervalBtn" style = "width:150px;">Reset Work Interval</button>
+</center>
+	<table style="width:150px">
+		<tr>
+			<td>
+	    		<button id = "powerBtn" class = "imgBtn"style = "border-radius:5px; float: center; bottom:10px; right: 2px;">
+	        		<img id = "power" src = "" />
+	    		</button>
+    		</td>
+    		<td>
+    			<div id = "SET" style = "visibility:hidden; color:red; float:right"><b>SET</b></div>
+    		</td>
+    	</tr>
+    </table>
+
+</body>
+</html>
+
+
+

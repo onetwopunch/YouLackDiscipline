@@ -1,0 +1,50 @@
+#discipline-list-box
+{
+            float:right; 
+			display:block; 
+			background:orange;
+			padding: 10px 15px 10px 15px;
+			border-radius: 10px;
+			border-style:groove;
+			border-color:#2B3990;
+			border-width:5px;
+			position:fixed;
+			max-width:500px;
+			top:250px;
+			right: 450px;
+
+
+
+}
+.checklist
+{
+    list-style-type: none;
+}
+.imgBtn
+{
+            cursor:pointer;
+            border-radius:5px; 
+            background-color: transparent;
+            border:none;
+}
+
+p
+{
+    font-size: 18px;
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+.txtBox
+{
+    border-radius:5px;
+    border-width:1px;
+    height: 23px;
+    width: 34px;
+    font-size: 14px;
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
+.selectBox option
+{
+ font-size: 14px;
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}

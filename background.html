@@ -5,19 +5,29 @@
 <script src="jquery-1.10.1.min.js"></script>
 <script type = "text/javascript" src = "background.js" ></script>
 </head>
-<body bgcolor = "#7D9FD3">
+<body>
+	<div id="top-banner">
+		<h1>You Lack Discipline!</h1>
+	</div>
+	<div id = "master">
+		<img src = "images/foobarHead.png"/>
+	</div>
+	<div id = "edit">
+		<p><input type = "text" id="add-domain" value="Add Website To Block"/></p>
+		<div id = "discipline-list-box">
+			<h2 align = "center">Blocked Websites</h2>
+			<p id = "list"></p>
+			<p><center>
+				<button id = "deleteBtn" 
+					style = "font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif; font-size:20;">
+					Remove Selected Sites
+				</button>
+			</center><p>
+		</div>
+	</div>
 
-<div id = "master" style = "float:left">
-	<img src = "images/smallFooBar.png" style = "width:700px" />
-</div>
-<div id = "discipline-list-box">
-<h2 align = "center" style = "font-family: 'Shojumaru', cursive; font-size: 32">Edit Discipline List</h2>
-<p id = "list"></p>
-<p><center><button id = "deleteBtn" style = "font-family: 'Shojumaru', cursive; font-size:18" >Remove Selected Sites</button></center></p>
-</div>
 
 
-
-<img src = "images/grass.png" style = "bottom:-15px; left:-15px; width:100%; height:50%"/>
+<!--<img src = "images/grass.png" style = "bottom:-15px; left:-15px; width:100%; height:50%"/>-->
 </body>
 </html>

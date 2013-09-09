@@ -1,9 +1,6 @@
 
 body {
     background: url(images/grey_comb.png) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
 }
 
@@ -29,6 +26,7 @@ h3
 p
 {
     font-size: 14px;
+    color:#DDD;
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 .txtBox
@@ -47,25 +45,25 @@ p
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 
-/*label {
+label {
     display: inline-block;
     cursor: pointer;
     position: relative;
     padding-left: 25px;
     margin-right: 15px;
-    font-size: 13px;
+    font-size: 18px;
 }
 
 label:before {
     content: "";
     display: inline-block;
 
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
 
-    margin-right: 10px;
+    margin-right: 20px;
     position: absolute;
-    left: 0;
+    left: -5;
     bottom: 1px;
     background-color: #aaa;
     box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
@@ -80,13 +78,13 @@ input[type=checkbox] {
     border-radius: 3px;
 }
 input[type=checkbox]:checked + label:before {
-    content: "\2713";
+    content: "\2714";
     text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
-    font-size: 15px;
-    color: #f3f3f3;
+    font-size: 36px;
+    color: #303030;/*#f3f3f3;*/
     text-align: center;
     line-height: 15px;
-}*/
+}
 
 #master 
 {
@@ -131,7 +129,7 @@ input[type=checkbox]:checked + label:before {
     height: 1000px;
     top: 50%;
     left: 50%;
-    margin-top: -180px;
+    margin-top: -240px;
     margin-left: -250px;
 }
 #discipline-list-box
@@ -142,6 +140,7 @@ input[type=checkbox]:checked + label:before {
     border-radius: 0.5em;
     position:relative;
     width: 500px;
+    min-height: 300px;
     box-shadow: 0 4px 6px -5px hsl(0, 30%, 80%), inset 0px 6px 6px -5px hsl(0, 0%, 2%);
 
 }
@@ -161,7 +160,7 @@ input[type=checkbox]:checked + label:before {
     border: none;
     padding: 0.8em;
     color: rgba(0,0,0,0.4);
-    font-size: 1.1em;
+    font-size: 1.2em;
     outline: none;
     box-shadow: 0 4px 6px -5px hsl(0, 30%, 80%), inset 0px 6px 6px -5px hsl(0, 0%, 2%);
 }

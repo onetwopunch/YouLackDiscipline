@@ -1,6 +1,6 @@
 {
   "name": "You Lack Discipline!",
-  "version": "2.1",
+  "version": "2.2",
   "description": "The extension that keeps you from looking at those distracting sites that keep you from doing what you need to do.",
   "manifest_version": 2,
   "background": {

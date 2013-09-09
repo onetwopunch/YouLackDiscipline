@@ -18,8 +18,7 @@ $(document).ready(function(){
 	});
 	$('#resetIntervalBtn').click(function(){
 		resetWorkInterval();
-	});
-                
+	});                
 });
 
 function setPowerButton(){
@@ -44,19 +43,17 @@ function initTimeValues(){
 		if(now.getHours() >12){
 			$('#startAmPm>option:eq(1)').prop('selected', true);
 			return now.getHours() - 12;
-			}
-		else{
+		} else {
 			return now.getHours();
-			}
+		}
 	}
 	var endHr = function(){
-	if(now.getHours() >12){
-		$('#endAmPm>option:eq(1)').prop('selected', true);
-		return now.getHours() - 11;
-	}
-	else{
-		return now.getHours() +1;
-	}
+		if(now.getHours() >12){
+			$('#endAmPm>option:eq(1)').prop('selected', true);
+			return now.getHours() - 11;
+		} else {
+			return now.getHours() +1;
+		}
 	}
 	var mins = function(){
 		return (now.getMinutes() < 10) ? "0"+now.getMinutes() : now.getMinutes();
@@ -71,13 +68,13 @@ function initTimeValues(){
 		if(localStorage.startHr > 12)
 			$('#startAmPm>option:eq(1)').prop('selected', true);
 		toggleSet(true);
-		}
+	}
 	if (localStorage.startMin == "null")
 		$('#startMin').val(mins);
 	else {
 		$('#startMin').val((localStorage.startMin < 10) ? "0"+localStorage.startMin : localStorage.startMin);
 		toggleSet(true);
-		}
+	}
 	if (localStorage.startMin == "null")
 		$('#endHr').val(endHr);
 	else {
@@ -85,13 +82,13 @@ function initTimeValues(){
 		if(localStorage.endHr > 12)
 			$('#endAmPm>option:eq(1)').prop('selected', true);
 		toggleSet(true);
-		}
+	}
 	if (localStorage.startMin == "null")
 		$('#endMin').val(mins);
 	else{
 		$('#endMin').val((localStorage.endMin < 10) ? "0"+localStorage.endMin : localStorage.endMin);
 		toggleSet(true);
-		}
+	}
 
 
 }
@@ -102,9 +99,13 @@ function openBackground(){
 }
 
 function url_domain(data) {
-  var    a      = document.createElement('a');
-         a.href = data;
-  return a.hostname;
+  var a = document.createElement('a');
+  a.href = data;
+  domain = a.hostname;
+  if(startsWith(domain, "www.")){
+      domain = domain.replace("www.", "");
+  }
+  return domain;
 }
 
 function addToList(){
@@ -120,7 +121,6 @@ function addToList(){
 		tmp = JSON.parse(localStorage.urlList);
 		
 		//this for loop checks if the current url is already in the list
-		//but if uncommented, none of the buttons work
  		for(i = 0; i<tmp.length; i++){
  			if(tablink == tmp[i]){
  				urlExists = false;

@@ -9,7 +9,7 @@
 $(document).ready(function(){
 
     if (!localStorage.hasBeenUsed){
-		var starterList= ["twitter.com","www.facebook.com","www.linkedin.com","www.reddit.com","www.stumbleupon.com", "www.tumblr.com"];
+		var starterList= ["twitter.com","facebook.com","linkedin.com","reddit.com","stumbleupon.com", "tumblr.com"];
 		localStorage.power = "off"
 		localStorage.urlList = JSON.stringify(starterList);
 		localStorage.hasBeenUsed = true;
@@ -18,28 +18,102 @@ $(document).ready(function(){
 		localStorage.startMin = "null";
 		localStorage.endMin = "null";
     }
+    if(!localStorage.version22){
+    	//as of version 2.2, domains do not start with www. so we remove them so they are compatible
+    	tmp = new Array();
+		tmp = JSON.parse(localStorage.urlList);
+    	for(var i = 0; i < tmp.length; i++) {
 
-    tmp = new Array();
-	tmp = JSON.parse(localStorage.urlList);
-		
-	var list = "<form name = 'url' action = '' method = 'post'>";
-	list +="<ul id='urlList'>"
-	 for(var i = 0;i <tmp.length; i++){
-		list = list +"<li class='checklist' id='item"+i+"'><input type = 'checkbox' name = 'list' value = '" +i+"'/>"
-				+ tmp[i] +"</li>";
-	}
-	list = list + "</ul></form>";
-	document.getElementById("list").innerHTML = list;
+	    	if(startsWith(tmp[i], "www.")) {
+			    tmp[i] = tmp[i].replace("www.", "");
+			}
+		}
+		localStorage.urlList = JSON.stringify(tmp);
+		localStorage.version22 = true;
+    }
 
-       
+    loadList();
+	
+	$('#add-domain').focus(function(){
+		$(this).val("http://");
+		$(this).css("color", "rgba(255,255,255,1)");
+    });
+
+	$('#add-domain').blur(function(){
+		$(this).val("Add Website To Block");
+		$(this).css("color", "rgba(0,0,0,0.4)");
+	});
+
     $('#deleteBtn').click(function(){
     	deleteUrl();
-    });  
+    });
+
+    $('#add-domain').bind("enterKey",function(e){
+   		addUrl();
+	});
+	$('#add-domain').keyup(function(e){
+	    if(e.keyCode == 13)
+	    {
+	        $(this).trigger("enterKey");
+	    }
+	});
             
 
 });
 
+function loadList() {
+	tmp = new Array();
+	tmp = JSON.parse(localStorage.urlList);
 
+	var list = "<form name = 'url' action = '' method = 'post'>";
+	list +="<div class='checkbox'>"
+	 for(var i = 0;i <tmp.length; i++){
+		list = list +"<div id = 'domain"+i+"'><input id='item"+i+"' type = 'checkbox' name = 'list' value = '" +i+"'/>"
+				+"<label for ='item"+i+"'>"+ tmp[i] +"</label><br></div>";
+	}
+	list = list + "</form>";
+	document.getElementById("list").innerHTML = list;
+}
+
+function startsWith(string, substr) {
+    return string.substring(0,substr.length) == substr;
+}
+
+function validateNewUrl(url){
+    // var pattern = /(http:\/\/)|(https:\/\/)[a-zA-Z0-9]+\.?[a-zA-Z0-9][a-zA-Z0-9-]+\.[a-zA-Z]{2,6}/;
+    // var pattern = /http(s?):\/\/([a-zA-Z])+\.([a-zA-Z0-9][a-zA-Z0-9-])+\.([a-zA-Z]{2,6})+/;
+    // var pattern = /http(s?):\/\/(?:[a-zA-Z]+\.){0,1}(?:[a-zA-Z0-9][a-zA-Z0-9-]+)\.(?:[a-zA-Z]{2,6})+/;
+    var pattern = /^https?:\/\/(?:www\.)?(?:[a-zA-Z0-9][a-zA-Z0-9-]+)(?=\.[a-zA-Z]{2,6})+.*$/;
+    return pattern.test(url);
+}
+
+function addUrl() {
+	oldList = new Array();
+	var newDomain = $('#add-domain').val();
+	if(newDomain == "Add Website To Block") {
+		$('#add-domain').blur();
+	} else {
+		if(validateNewUrl(newDomain)) {
+			oldList = JSON.parse(localStorage.urlList);
+			oldList.push(url_domain(newDomain));
+			localStorage.urlList = JSON.stringify(oldList);
+			loadList();
+			$('#add-domain').blur();
+		} else {
+			// alert("Invalid Domain");
+			$('#add-domain').blur( function() {
+				$('#add-domain').val("Invalid domain, where's your discipline?");
+				$('#add-domain').css("color", "rgba(255,50,50,1)");
+			});
+			$('#add-domain').blur();
+			$('#add-domain').blur(function(){
+				$(this).val("Add Website To Block");
+				$(this).css("color", "rgba(0,0,0,0.4)");
+		    });
+		}
+		
+	}
+}
 function deleteUrl(){
 	oldList = new Array();
 	newList = new Array();
@@ -49,19 +123,24 @@ function deleteUrl(){
 		if(document.url.list[i].checked !=true){
 			newList.push(oldList[i]);
 		} else {
-			$('#item'+i).fadeOut('slow');
+			// $("label[for='item"+i+"']").fadeOut('slow');
+			// $('#item'+i).fadeOut('slow');
+			$('#domain'+i).fadeOut('slow');
 		}
 	}
 	
 	delete oldList;
 	localStorage.urlList = JSON.stringify(newList);
-	// chrome.tabs.reload();
 }
 
 function url_domain(data) {
-  var    a      = document.createElement('a');
-         a.href = data;
-  return a.hostname;
+  var a = document.createElement('a');
+  a.href = data;
+  domain = a.hostname;
+  if(startsWith(domain, "www.")){
+      domain = domain.replace("www.", "");
+  }
+  return domain;
 }
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
